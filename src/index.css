@@ -1,13 +1,230 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar_c {
+    background-color: #4A5E32;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.navbar {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.Logo .Logo1 {
+    font-size: 34px;
+    font-weight: 200;
+    position: relative;
+    top: 2px;
+    letter-spacing: 1px;
+}
+
+.Logo .Logo2 {
+    letter-spacing: 5px !important;
+    font-weight: 100;
+    position: relative;
+    bottom: 8px;
+}
+
+.navbar .box2 {
+    display: flex;
+    gap: 20px;
+}
+
+.katalog_Button {
+    display: flex;
+    align-items: center;
+    color: white;
+    gap: 8px;
+    background-color: #b4c1a19d;
+    padding: 10px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar_search {
+    display: flex;
+    align-items: center;
+}
+
+.navbar_search {
+    width: fit-content;
+}
+
+.navbar_search input {
+    width: 400px;
+    height: 43px;
+    padding: 5px 10px;
+    color: rgb(0, 0, 0) !important;
+    border: 1px solid white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    outline: none;
+}
+
+.search_icon {
+    color: white;
+    font-size: 23px;
+    background-color: #b4c1a19d;
+    padding: 10px 23px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar .box3 {
+    display: flex;
+    align-items: center;
+    color: white;
+    gap: 5px;
+}
+
+.navbar .box3 p {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.navbar .box3 p:hover {
+    background-color: #b4c1a19d;
+}
+
+.icon {
+    font-size: 25px;
+}
+
+.catigoriyalar {
+    width: 1200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+/* modal catigoriya */
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1000;
+}
+
+.modal_content {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 5px;
+    width: 1200px;
+    margin-top: 70px;
+    height: fit-content;
+    max-width: 90%;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* catigoriya responsiv */
+.catigoriyalar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0 10px 0;
+    color: #ffffff;
+}
+
+.catigoriyalar a {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #b4c1a19d;
+    transition: all 0.3;
+}
+
+.catigoriyalar a:hover {
+    color: #4A5E32;
+    background-color: #b4c1a1;
+}
+
+.modalcatigory {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalcatigory a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 20px;
+}
+
+.modalcatigory a:hover {
+    color: #4A5E32;
+    background-color: #b4c1a1;
+}
+
+@media (max-width: 1300px) {
+    .catigoriyalar a:nth-child(n+7) {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .catigoriyalar a:nth-child(n+6) {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px) {
+    .catigoriyalar a:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .catigoriyalar a:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 950px) {
+    .catigoriyalar {
+        display: none;
+    }
+}
+
+.show-more {
+    display: none;
+}
+
+@media (max-width: 950px) {
+    .show-more {
+        display: none;
+    }
 }
