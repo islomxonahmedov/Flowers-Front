@@ -8,7 +8,8 @@ import { categoryFailure, categoryStart, categorySuccess } from "../redux/slice/
 import Service from '../config/servis';
 import { GiFlowerPot, GiHighGrass, GiFruitTree, GiPlantSeed, GiFlowers, GiWateringCan } from "react-icons/gi";
 import { PiTreeLight } from "react-icons/pi";
-import { FaTree, FaLeaf, FaPepperHot } from 'react-icons/fa'; // Mos iconlar importi
+import { FaTree, FaLeaf, FaPepperHot } from 'react-icons/fa';
+import { IoHomeOutline } from "react-icons/io5";
 
 const categoryIcons = [
     FaTree,       // 0 - Flower
@@ -29,6 +30,7 @@ function Navbar() {
     const [modalOpen, setModalOpen] = useState(false);
     const [visibleCategories, setVisibleCategories] = useState([]);
     const [modalHoveredCategory, setModalHoveredCategory] = useState(null);
+    const [lastHoveredCategory, setLastHoveredCategory] = useState(null); // Oxirgi hover qilingan kategoriya
     const [categoryBooks, setCategoryBooks] = useState([]);
     const [loadingBooks, setLoadingBooks] = useState(false);
     const modalRef = useRef(null);
@@ -47,7 +49,7 @@ function Navbar() {
     const fetchCategoryBooks = async (categoryId) => {
         try {
             setLoadingBooks(true);
-            const { data } = await Service.getBooksByCategory(categoryId); // Service da kitoblarni olish funktsiyasi kerak
+            const { data } = await Service.getBooksByCategory(categoryId);
             setCategoryBooks(data);
         } catch (error) {
             console.log(error.message);
@@ -63,12 +65,10 @@ function Navbar() {
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
-            if (width <= 950) {
+            if (width <= 850) {
                 setVisibleCategories([]); // Hide all categories
             } else if (width <= 1000) {
-                setVisibleCategories(categories.slice(0, 5)); // Show only the first 5 categories
-            } else if (width <= 1100) {
-                setVisibleCategories(categories.slice(0, 6)); // Show the first 6 categories
+                setVisibleCategories(categories.slice(0, 6)); // Show only the first 5 categories
             } else if (width <= 1200) {
                 setVisibleCategories(categories.slice(0, 7)); // Show the first 7 categories
             } else if (width <= 1300) {
@@ -97,6 +97,13 @@ function Navbar() {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [modalOpen]);
+
+    useEffect(() => {
+        if (modalHoveredCategory) {
+            fetchCategoryBooks(modalHoveredCategory);
+            setLastHoveredCategory(modalHoveredCategory); // Oxirgi hover qilingan kategoriyani saqlash
+        }
+    }, [modalHoveredCategory]);
 
     const toggleModal = () => {
         setModalOpen(!modalOpen);
@@ -129,19 +136,19 @@ function Navbar() {
                     <NavLink to="/login">
                         <p>
                             <CiUser className='icon' />
-                            Kirish uchun
+                            <p className='nonecatigory'>Kirish</p>
                         </p>
                     </NavLink>
                     <NavLink to="/favorites">
                         <p>
                             <CiHeart className='icon' />
-                            Sevimlilar
+                            <p className='nonecatigory'>Saralangan</p>
                         </p>
                     </NavLink>
                     <NavLink to="/cart">
                         <p>
                             <CiShoppingCart className='icon' />
-                            Savat
+                            <p className='nonecatigory'>Savat</p>
                         </p>
                     </NavLink>
                 </div>
@@ -164,17 +171,16 @@ function Navbar() {
                                 </div>
                             );
                         })}
-                        <button className='flex items-center gap-1' onClick={toggleModal}>Yana <MdKeyboardArrowDown className='size-5' /></button>
+                        <button className='flex items-center gap-1 show-more' onClick={toggleModal}>Yana <MdKeyboardArrowDown className='size-5' /></button>
                     </>
                 )}
             </div>
 
             {/* Modal */}
             {modalOpen && (
-                <div ref={modalRef} className='modal'>
+                <div onClick={toggleModal} className='modal'>
                     <div className='modal_content'>
-                        <span className='close' onClick={toggleModal}>&times;</span>
-                        <h2>Kategoriyalar</h2>
+                        <span className='close' onClick={toggleModal}><HiXMark className='modalXmark' /></span>
                         {isLoading ? (
                             <p>Loading...</p>
                         ) : isError ? (
@@ -188,39 +194,44 @@ function Navbar() {
                                             key={category?._id}
                                             onMouseEnter={() => {
                                                 setModalHoveredCategory(category._id);
-                                                fetchCategoryBooks(category._id);
-                                            }}
-                                            onMouseLeave={() => {
-                                                setModalHoveredCategory(null);
-                                                setCategoryBooks([]);
                                             }}>
                                             <NavLink to={`/category/${category?._id}`} className="category-link">
                                                 <Icon className='category-icon size-7' />
                                                 {category?.nomi}
                                             </NavLink>
-                                            {modalHoveredCategory === category._id && (
-                                                <div className='books-list'>
-                                                    {loadingBooks ? (
-                                                        <p>Loading books...</p>
-                                                    ) : (
-                                                        categoryBooks.map((book) => (
-                                                            <div key={book._id} className='book-item'>
-                                                                <p>{book.nomi}</p>
-                                                            </div>
-                                                        ))
-                                                    )}
-                                                </div>
-                                            )}
                                         </li>
                                     );
                                 })}
                             </ul>
                         )}
+                        {lastHoveredCategory && (
+                            <div className='books-list'>
+                                {loadingBooks ? (
+                                    <p>Loading books...</p>
+                                ) : (
+                                    categoryBooks.map((book) => (
+                                        <div key={book._id} className='book-item'>
+                                            <p>{book.nomi}</p>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        )}
+
                     </div>
                 </div>
             )}
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#home"><IoHomeOutline className='icon' /> Bosh sahifa</a></li>
+                    <li onClick={toggleModal}><a href="#about"><CiSearch className='icon' />Katalog</a></li>
+                    <li><a href="#services"><CiShoppingCart className='icon' />Savat</a></li>
+                    <li><a href="#contact"><CiHeart className='icon' />Saralangan</a></li>
+                    <li><a href="#contact"><CiUser className='icon' />Kirish</a></li>
+                </ul>
+            </nav>
         </div>
-    )
+    );
 }
 
 export default Navbar;

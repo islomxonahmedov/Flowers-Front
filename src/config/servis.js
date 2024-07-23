@@ -22,7 +22,7 @@ const Service = {
         return response;
     },
     async getBooksByCategory(categoryId) {
-        const response = await api.get(`/book/byCategory/${categoryId}`);
+        const response = await api.get(`/flowers/byCategory/${categoryId}`);
         return response;
     }
 }
