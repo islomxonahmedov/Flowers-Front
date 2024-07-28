@@ -99,7 +99,7 @@ nav {
     display: flex;
     align-items: center;
     color: white;
-    gap: 5px;
+    gap: 30px;
 }
 
 .navbar .box3 p {
@@ -335,6 +335,10 @@ nav {
         padding: 8.7px 13px;
     }
 
+    .navbar .box3 {
+        gap: 10px;
+    }
+
     .nonecatigory {
         display: none !important;
     }
@@ -416,7 +420,7 @@ nav {
 
     .modal_content {
         width: 100%;
-        margin-top: 60px;
+        margin-top: 50px;
         height: 100%;
         max-width: 100%;
     }
@@ -457,7 +461,7 @@ nav {
         left: 0;
         display: flex !important;
         justify-content: center !important;
-        padding: 10px 0;
+        padding: 10px 0 0 0;
         position: fixed;
         bottom: 0;
         top: unset;
@@ -466,6 +470,10 @@ nav {
         border-top-left-radius: 50px;
         border-top-right-radius: 50px;
         border-top: 4px solid #4A5E32;
+    }
+
+    .catigoriyalar {
+        display: none;
     }
 
     nav ul {

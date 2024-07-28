@@ -74,7 +74,7 @@ function Navbar() {
             } else if (width <= 1300) {
                 setVisibleCategories(categories.slice(0, 8)); // Show the first 8 categories
             } else {
-                setVisibleCategories(categories); // Show all categories
+                setVisibleCategories(categories.slice(0, 9));
             }
         };
 
@@ -114,8 +114,8 @@ function Navbar() {
             <div className="navbar">
                 <NavLink to={"/"}>
                     <div className='Logo'>
-                        <p className='Logo1'>FLOWERS</p>
-                        <p className='Logo2'>GARDENING PLANTS</p>
+                        <div className='Logo1'>FLOWERS</div>
+                        <div className='Logo2'>GARDENING PLANTS</div>
                     </div>
                 </NavLink>
                 <div className='box2'>
@@ -134,30 +134,30 @@ function Navbar() {
                 </div>
                 <div className='box3'>
                     <NavLink to="/login">
-                        <p>
+                        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
                             <CiUser className='icon' />
-                            <p className='nonecatigory'>Kirish</p>
-                        </p>
+                            <span className='nonecatigory'>Kirish</span>
+                        </div>
                     </NavLink>
                     <NavLink to="/favorites">
-                        <p>
+                        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
                             <CiHeart className='icon' />
-                            <p className='nonecatigory'>Saralangan</p>
-                        </p>
+                            <span className='nonecatigory'>Saralangan</span>
+                        </div>
                     </NavLink>
                     <NavLink to="/cart">
-                        <p>
+                        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
                             <CiShoppingCart className='icon' />
-                            <p className='nonecatigory'>Savat</p>
-                        </p>
+                            <span className='nonecatigory'>Savat</span>
+                        </div>
                     </NavLink>
                 </div>
             </div>
             <div className='catigoriyalar'>
                 {isLoading ? (
-                    <p>Loading...</p>
+                    <div>Loading...</div>
                 ) : isError ? (
-                    <p>Error: {isError}</p>
+                    <div>Error: {isError}</div>
                 ) : (
                     <>
                         {visibleCategories.map((category, index) => {
@@ -182,9 +182,9 @@ function Navbar() {
                     <div className='modal_content'>
                         <span className='close' onClick={toggleModal}><HiXMark className='modalXmark' /></span>
                         {isLoading ? (
-                            <p>Loading...</p>
+                            <div>Loading...</div>
                         ) : isError ? (
-                            <p>Error: {isError}</p>
+                            <div>Error: {isError}</div>
                         ) : (
                             <ul className='modalcatigory'>
                                 {categories?.map((category, index) => {
@@ -207,17 +207,16 @@ function Navbar() {
                         {lastHoveredCategory && (
                             <div className='books-list'>
                                 {loadingBooks ? (
-                                    <p>Loading books...</p>
+                                    <div>Loading books...</div>
                                 ) : (
                                     categoryBooks.map((book) => (
                                         <div key={book._id} className='book-item'>
-                                            <p>{book.nomi}</p>
+                                            <div>{book.nomi}</div>
                                         </div>
                                     ))
                                 )}
                             </div>
                         )}
-
                     </div>
                 </div>
             )}

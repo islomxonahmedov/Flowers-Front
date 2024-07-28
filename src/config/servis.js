@@ -4,10 +4,10 @@ import { getFromLocalStorage } from "./localstorage";
 api.interceptors.request.use((req) => {
     const token = getFromLocalStorage("token");
     if (token) {
-        req.headers.Authorization = token;
+      req.headers.Authorization = `Bearer ${token}`;
     }
     return req;
-});
+  });
 
 const Service = {
     async getAuth() {
@@ -25,6 +25,8 @@ const Service = {
         const response = await api.get(`/flowers/byCategory/${categoryId}`);
         return response;
     }
+
+    
 }
 
 
