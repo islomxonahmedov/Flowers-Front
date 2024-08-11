@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { authSuccess } from './redux/slice/authSlice';
 import { getFromLocalStorage } from "./config/localstorage";
+import FlowersInfo from "./pages/FlowersSee";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/flowers/:id" element={<FlowersInfo />} />
       </Routes>
     </div>
   );
