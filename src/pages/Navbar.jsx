@@ -160,21 +160,22 @@ function Navbar() {
                     </div>
                     <div className='box3'>
                         <NavLink to="/login">
-                            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <div style={{ display: "flex",gap:"2px", alignItems: "center" }}>
                                 <CiUser className='icon' />
                                 <span className='nonecatigory'>Kirish</span>
                             </div>
                         </NavLink>
                         <NavLink to="/favorites">
-                            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <div style={{ display: "flex",gap:"2px", alignItems: "center" }}>
                                 <CiHeart className='icon' />
                                 <span className='nonecatigory'>Saralangan</span>
                             </div>
                         </NavLink>
-                        <NavLink to="/cart">
-                            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <NavLink to="/basket">
+                            <div style={{ display: "flex",gap:"2px", alignItems: "center" }}>
                                 <CiShoppingCart className='icon' />
                                 <span className='nonecatigory'>Savat</span>
+                                <span className='basket_length'></span>
                             </div>
                         </NavLink>
                     </div>

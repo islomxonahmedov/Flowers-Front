@@ -8,6 +8,5 @@ export const store = configureStore({
         auth: authSlice,
         category: categorySlice,
         flower: flowersSlice,
-
     }
 });

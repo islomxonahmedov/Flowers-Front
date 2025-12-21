@@ -4,6 +4,7 @@ import { clearLocalStorage, saveToLocalStorage } from "../../config/localstorage
 const initialState = {
     isLoading: false,
     auth: null,
+    userId: null, 
     isLoggedIn: false,
     isError: null,
 };
@@ -18,6 +19,7 @@ const AuthSlice = createSlice({
         authSuccess: (state, action) => {
             state.isLoading = false;
             state.auth = action.payload.data;
+            state.userId = action.payload.data._id;
             state.isLoggedIn = true;
             if (action.payload.token) {
                 saveToLocalStorage("token", action.payload.token);
@@ -27,10 +29,11 @@ const AuthSlice = createSlice({
             state.isLoading = false;
             state.isError = action.payload;
         },
-        authLogout: (state, action) => {
+        authLogout: (state) => {
             state.isLoading = false;
             state.isLoggedIn = false;
             state.auth = null;
+            state.userId = null; 
             clearLocalStorage();
         },
     },
